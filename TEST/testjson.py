@@ -55,5 +55,3 @@ with open("./schedule_2016_03.json", encoding='utf8') as f:
         group_data = smy_data["games"]
         for want_data in group_data:
             get_match_data(want_data)
-
-
