@@ -17,14 +17,13 @@ def get_team_data(team_type):
     displayabbr = profile["displayAbbr"]
     displayconference = profile["displayConference"]
     division = profile["division"]
-    team_id = profile["id"]
     isallstarteam = profile["isAllStarTeam"]
     isleagueteam = profile["isLeagueTeam"]
     name = profile["name"]
     nameen = profile["nameEn"]
 
     return (confrank, divrank, losses, abbr, city, cityen, code, conference, displayabbr,
-            displayconference, division, team_id, isallstarteam, isleagueteam, name, nameen)
+            displayconference, division, isallstarteam, isleagueteam, name, nameen)
 
 
 def get_match_data(in_data):
@@ -41,11 +40,19 @@ def get_match_data(in_data):
     hometeamid = match_profile["homeTeamId"]
     seasontype = match_profile["seasonType"]
     utcmillis = match_profile["utcMillis"]
-    away_team_data = get_team_data(want_data["awayTeam"])
-    home_team_data = get_team_data(want_data["homeTeam"])
+    awayteam_data = get_team_data(want_data["awayTeam"])
+    hometeam_data = get_team_data(want_data["homeTeam"])
     match_data = (gameid, hometeamid, awayteamid, seasontype, arenalocation, arenaname,
                   attendance, homescore, awayscore, gamelength, utcmillis)
-    print(match_data, home_team_data, away_team_data)
+    sum_data = match_data+hometeam_data+awayteam_data
+    with open("./result.txt", "at") as file:
+        for i in range(len(sum_data)):
+            if i != len(sum_data)-1:
+                file.write(str(sum_data[i]))
+                file.write("|*|")
+            else:
+                file.write(str(sum_data[i]))
+        file.write("\n")
 
 
 with open("./schedule_2016_03.json", encoding='utf8') as f:
@@ -55,3 +62,5 @@ with open("./schedule_2016_03.json", encoding='utf8') as f:
         group_data = smy_data["games"]
         for want_data in group_data:
             get_match_data(want_data)
+
+
