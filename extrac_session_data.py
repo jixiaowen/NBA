@@ -137,7 +137,7 @@ def main():
             continue
 
 
-# 初始化,从新解析
+# 初始化,重新解析
 # begin_again()
 
 main()
