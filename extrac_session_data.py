@@ -117,7 +117,7 @@ if not os.path.exists(data_path):
     os.mkdir(data_path)
 
 
-# 初始化函数
+# 删除文件,初始化
 def begin_again():
     if os.path.exists(databasefile):
         os.remove(databasefile)
