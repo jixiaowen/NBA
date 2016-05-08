@@ -62,13 +62,14 @@ def get_game_data():
                         jsonfile.write(respone.read().decode('utf-8'))
                     cur.execute("update gameid set isdone ='Y' where id = '" + gameid + "'")
                     con.commit()
+                    time.sleep(2)
             except URLError:
                 continue
             except HTTPError:
                 continue
             except socket.timeout:
                 continue
-        time.sleep(2)
+    con.close()
 
 get_game_data()
 
